@@ -2,5 +2,5 @@ class Tank:
 	de f __init__(self, postition,angle, lienImage) :
 		self.image = pygame.image.load(lienImage).convert_alpha()
 		self.imageTournee = self.image
-self.angle = angle
+		self.angle = angle
 		self.position = position
