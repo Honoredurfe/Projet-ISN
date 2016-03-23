@@ -1,0 +1,84 @@
+# -*- coding: utf-8 -*-
+"""
+PETIOT Arthur
+DREVET Carl
+"""
+import pygame
+from math import *
+from pygame.locals import *
+
+pygame.init()
+fenetre = pygame.display.set_mode((750,750))
+pygame.display.set_caption("Projet ISN TANK 2D")
+
+fond = pygame.image.load("test pygame fond gris.png")
+fenetre.blit(fond, (0,0))
+
+
+tank1 = Tank(pygame.Rect(100,100,100,100), 90, "tankdetoureJoueur1.png")
+fenetre.blit(tank1.image, tank1.position)
+
+tank2 = Tank(pygame.Rect(200,200,200,200), 90 , "tankdetoureJoueur2.png")
+fenetre.blit(tank2.image, tank2.position)
+
+pygame.display.flip()
+
+pygame.key.set_repeat(400, 50)
+
+continuer = True
+angleJ1=90
+angleJ2=90
+vitesse=7.5
+
+estActif = {K_ESCAPE: False, K_DOWN: False, K_RIGHT: False, K_LEFT: False, K_UP: False, K_s:False, K_w:False, K_a:False, K_d:False}
+
+while continuer:
+    for event in pygame.event.get():
+        
+        if event.type == KEYDOWN:
+            estActif[event.key] = True
+        elif event.type == KEYUP:
+            estActif[event.key] = False
+        
+        
+        if estActif[K_ESCAPE]:
+            continuer = False
+#Joueur1         
+        #faire reculer le tank
+        if estActif[K_DOWN]:
+            position_tankJ1 = position_tankJ1.move(-vitesse*cos(angleJ1*3.14/180),vitesse*sin(angleJ1*3.14/180))
+        #faire avancer le tank    
+        if estActif[K_UP]:
+            position_tankJ1 = position_tankJ1.move(vitesse*cos(angleJ1*3.14/180),-vitesse*sin(angleJ1*3.14/180))
+        #rotation du tank
+        if estActif[K_RIGHT]:
+            angleJ1 -= 22.5
+            tankrotatedJ1=pygame.transform.rotate(tankJ1,angleJ1-90)
+        if estActif[K_LEFT]:
+            angleJ1 += 22.5
+            tankrotatedJ1=pygame.transform.rotate(tankJ1,angleJ1-90)     
+#Joueur2
+         #faire reculer le tank
+        if estActif[K_s]:
+            position_tankJ2 = position_tankJ2.move(-vitesse*cos(angleJ2*3.14/180),vitesse*sin(angleJ2*3.14/180))
+        #faire avancer le tank    
+        if estActif[K_w]:
+            position_tankJ2 = position_tankJ2.move(vitesse*cos(angleJ2*3.14/180),-vitesse*sin(angleJ2*3.14/180))
+        #rotation du tank
+        if estActif[K_d]:
+            angleJ2 -= 22.5
+            tankrotatedJ2=pygame.transform.rotate(tankJ2,angleJ2-90)
+        if estActif[K_a]:
+            angleJ2 += 22.5
+            tankrotatedJ2=pygame.transform.rotate(tankJ2,angleJ2-90)
+
+
+
+
+
+          
+		
+    fenetre.blit(fond, (0,0))
+    fenetre.blit(tankrotatedJ1, position_tankJ1)
+    fenetre.blit(tankrotatedJ2, position_tankJ2)
+    pygame.display.flip()
