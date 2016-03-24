@@ -6,19 +6,20 @@ DREVET Carl
 import pygame
 from math import *
 from pygame.locals import *
+from ClassTank import *
 
 pygame.init()
 fenetre = pygame.display.set_mode((750,750))
 pygame.display.set_caption("Projet ISN TANK 2D")
 
-fond = pygame.image.load("test pygame fond gris.png")
+fond = pygame.image.load("fond gris.png")
 fenetre.blit(fond, (0,0))
 
 
-tank1 = Tank(pygame.Rect(100,100,100,100), 90, "tankdetoureJoueur1.png")
+tank1 = Tank(pygame.Rect(100,100,100,100), 90, "tankJoueur1.png", 15)
 fenetre.blit(tank1.image, tank1.position)
 
-tank2 = Tank(pygame.Rect(200,200,200,200), 90 , "tankdetoureJoueur2.png")
+tank2 = Tank(pygame.Rect(200,200,200,200), 90 , "tankJoueur2.png", 15)
 fenetre.blit(tank2.image, tank2.position)
 
 pygame.display.flip()
@@ -26,9 +27,6 @@ pygame.display.flip()
 pygame.key.set_repeat(400, 50)
 
 continuer = True
-angleJ1=90
-angleJ2=90
-vitesse=7.5
 
 estActif = {K_ESCAPE: False, K_DOWN: False, K_RIGHT: False, K_LEFT: False, K_UP: False, K_s:False, K_w:False, K_a:False, K_d:False}
 
@@ -43,42 +41,33 @@ while continuer:
         
         if estActif[K_ESCAPE]:
             continuer = False
-#Joueur1         
-        #faire reculer le tank
+        
+        
+		
+	#faire reculer le tank
         if estActif[K_DOWN]:
-            position_tankJ1 = position_tankJ1.move(-vitesse*cos(angleJ1*3.14/180),vitesse*sin(angleJ1*3.14/180))
+            tank1.reculer()
+        if estActif[K_s]:
+            tank2.reculer()
         #faire avancer le tank    
         if estActif[K_UP]:
-            position_tankJ1 = position_tankJ1.move(vitesse*cos(angleJ1*3.14/180),-vitesse*sin(angleJ1*3.14/180))
-        #rotation du tank
-        if estActif[K_RIGHT]:
-            angleJ1 -= 22.5
-            tankrotatedJ1=pygame.transform.rotate(tankJ1,angleJ1-90)
-        if estActif[K_LEFT]:
-            angleJ1 += 22.5
-            tankrotatedJ1=pygame.transform.rotate(tankJ1,angleJ1-90)     
-#Joueur2
-         #faire reculer le tank
-        if estActif[K_s]:
-            position_tankJ2 = position_tankJ2.move(-vitesse*cos(angleJ2*3.14/180),vitesse*sin(angleJ2*3.14/180))
-        #faire avancer le tank    
+            tank1.avancer()
         if estActif[K_w]:
-            position_tankJ2 = position_tankJ2.move(vitesse*cos(angleJ2*3.14/180),-vitesse*sin(angleJ2*3.14/180))
-        #rotation du tank
-        if estActif[K_d]:
-            angleJ2 -= 22.5
-            tankrotatedJ2=pygame.transform.rotate(tankJ2,angleJ2-90)
-        if estActif[K_a]:
-            angleJ2 += 22.5
-            tankrotatedJ2=pygame.transform.rotate(tankJ2,angleJ2-90)
-
-
-
-
-
-          
+            tank2.avancer()
 		
+	#rotation du tank a droite
+        if estActif[K_RIGHT]:
+            tank1.tournerADroite()
+        if estActif[K_d]:
+            tank2.tournerADroite()
+        #rotation du tank a gauche
+        if estActif[K_LEFT]:
+            tank1.tournerAGauche()
+        if estActif[K_a]:
+            tank2.tournerAGauche()
+
+
     fenetre.blit(fond, (0,0))
-    fenetre.blit(tankrotatedJ1, position_tankJ1)
-    fenetre.blit(tankrotatedJ2, position_tankJ2)
+    fenetre.blit(tank1.imageTournee, tank1.position)
+    fenetre.blit(tank2.imageTournee, tank2.position)
     pygame.display.flip()
