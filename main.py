@@ -11,6 +11,8 @@ from Tank import *
 pygame.init()
 fenetre = pygame.display.set_mode((750,750))
 pygame.display.set_caption(titreFenetre)
+icone = pygame.image.load(imageIcone)
+pygame.display.set_icon(icone)
 
 fond = pygame.image.load(imageFond)
 fenetre.blit(fond, (0,0))
