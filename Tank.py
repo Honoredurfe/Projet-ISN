@@ -16,7 +16,6 @@ class Tank:
     def avancer(self):
         self.position = self.position.move(self.vitesse*cos(self.angle*3.14/180),-self.vitesse*sin(self.angle*3.14/180))
 		
-    def tournerADroite(self, angle):
+    def tourner(self, angle):
         self.angle += angle
         self.imageTournee=pygame.transform.rotate(self.image,self.angle-90)
-		
