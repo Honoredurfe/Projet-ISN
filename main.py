@@ -6,7 +6,7 @@ DREVET Carl
 import pygame
 from math import *
 from pygame.locals import *
-from ClassTank import *
+from Tank import *
 
 pygame.init()
 fenetre = pygame.display.set_mode((750,750))
