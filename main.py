@@ -10,16 +10,16 @@ from Tank import *
 
 pygame.init()
 fenetre = pygame.display.set_mode((750,750))
-pygame.display.set_caption("Projet ISN TANK 2D")
+pygame.display.set_caption(titreFenetre)
 
-fond = pygame.image.load("fond gris.png")
+fond = pygame.image.load(imageFond)
 fenetre.blit(fond, (0,0))
 
 
-tank1 = Tank(pygame.Rect(100,100,100,100), 90, "tankJoueur1.png", 15)
+tank1 = Tank(pygame.Rect(100,100,0,0), 90, imageTank1 , speed)
 fenetre.blit(tank1.image, tank1.position)
 
-tank2 = Tank(pygame.Rect(200,200,200,200), 90 , "tankJoueur2.png", 15)
+tank2 = Tank(pygame.Rect(200,200,0,0), 90 , imageTank2, speed)
 fenetre.blit(tank2.image, tank2.position)
 
 pygame.display.flip()
@@ -57,14 +57,14 @@ while continuer:
 		
 	#rotation du tank a droite
         if estActif[K_RIGHT]:
-            tank1.tournerADroite()
+            tank1.tourner(-22.5)
         if estActif[K_d]:
-            tank2.tournerADroite()
+            tank2.tourner(-22.5)
         #rotation du tank a gauche
         if estActif[K_LEFT]:
-            tank1.tournerAGauche()
+            tank1.tourner(22.5)
         if estActif[K_a]:
-            tank2.tournerAGauche()
+            tank2.tourner(22.5)
 
 
     fenetre.blit(fond, (0,0))
