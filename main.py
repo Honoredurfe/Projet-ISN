@@ -6,19 +6,17 @@ DREVET Carl
 import pygame
 from math import *
 from pygame.locals import *
-from Tank import *
+from tank import *
+from constantes import *
 
 pygame.init()
-fenetre = pygame.display.set_mode((750,750))
+fenetre = pygame.display.set_mode((1250,700))
 pygame.display.set_caption(titreFenetre)
-icone = pygame.image.load(imageIcone)
-pygame.display.set_icon(icone)
-
 fond = pygame.image.load(imageFond)
 fenetre.blit(fond, (0,0))
 
 
-tank1 = Tank(pygame.Rect(100,100,0,0), 90, imageTank1 , speed)
+tank1 = Tank(pygame.Rect(100,100,0,0), 90, imageTank1, speed)
 fenetre.blit(tank1.image, tank1.position)
 
 tank2 = Tank(pygame.Rect(200,200,0,0), 90 , imageTank2, speed)
