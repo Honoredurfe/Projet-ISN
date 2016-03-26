@@ -12,13 +12,17 @@ from constantes import *
 pygame.init()
 fenetre = pygame.display.set_mode((1250,700))
 pygame.display.set_caption(titreFenetre)
+icone = pygame.image.load(imageIcone)
+pygame.display.set_icon(icone)
 
 estActif = {K_ESCAPE: False, K_DOWN: False, K_RIGHT: False, K_LEFT: False, K_UP: False, K_s:False, K_w:False, K_a:False, K_d:False, K_F1:False}
 
 continuer = True
 accueil = True
-menu = pygame.image.load(imageMenu)
-
+aides = True
+menuChoix = pygame.image.load(imageMenu)
+menuAides = pygame.image.load(imageAides)
+menuTutoriel = pygame.image.load(imageTutoriel)
 
 while accueil:
     for event in pygame.event.get():
@@ -38,8 +42,23 @@ while accueil:
                 accueil = False
             if rectangleNiveau3.collidepoint(event.pos[0], event.pos[1]):
                 accueil = False
+            if rectangleTutoriel.collidepoint(event.pos[0], event.pos[1]):
+                fenetre.blit(menuTutoriel, (0,0))
+                pygame.display.flip()
+                pygame.time.wait(1000)
+                #ouvrir un fichier html
+                pygame.time.wait(1000)
+                accueil = True
+                    
+            if rectangleAides.collidepoint(event.pos[0], event.pos[1]):
+                fenetre.blit(menuAides, (0,0))
+                pygame.display.flip()
+                pygame.time.wait(1000)
+                accueil = True
+                    
+                    
 
-    fenetre.blit(menu, (0,0))
+    fenetre.blit(menuChoix, (0,0))
     pygame.display.flip()
 
 
